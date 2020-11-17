@@ -42,4 +42,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get Favourite Contacts
+     *
+     * @return User|\Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function favouriteContacts()
+    {
+        return $this->belongsToMany('App\Models\User', 'favourite_contacts', 'owner_id', 'contact_id');
+    }
+
+
+    /**
+     * Check if contact owned by user
+     *
+     * @return bool
+     */
+    public function isLikedByUser($user)
+    {
+        return $user->favouriteContacts->find($this->id) ? true : false;
+    }
+
 }

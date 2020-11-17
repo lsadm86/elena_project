@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('favourite_contacts', App\Http\Controllers\FavouriteContactsController::class)
+    ->names('favourite_contacts');
